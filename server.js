@@ -14,9 +14,9 @@ app.get('/', function(req, res){
 
 app.listen(port);
 
-// var uri = "mongodb://pacific-brook-1:HackMCO2015@ds062097.mongolab.com:62097/golf";
-// var golferDB = mongojs(uri, ['golfer_reservation_requests']);
-// var courseDB = mongojs(uri, ['course_reservation_requests']);
+var uri = "mongodb://pacific-brook-1:HackMCO2015@ds062097.mongolab.com:62097/golf";
+var golferDB = mongojs(uri, ['golfer_reservation_requests']);
+var courseDB = mongojs(uri, ['course_reservation_requests']);
 
 
 // //while connected to a client

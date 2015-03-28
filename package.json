@@ -1,0 +1,24 @@
+{
+  "name": "golf-backend",
+  "version": "0.0.0",
+  "description": "because Microsoft",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tylerl0706/golf-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tylerl0706/golf-backend/issues"
+  },
+  "homepage": "https://github.com/tylerl0706/golf-backend",
+  "dependencies": {
+    "express": "3.4.8",
+    "socket.io": "1.3.5"
+  }
+}

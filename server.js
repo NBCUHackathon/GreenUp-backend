@@ -14,31 +14,31 @@ app.get('/', function(req, res){
 
 app.listen(port);
 
-var uri = "mongodb://pacific-brook-1:HackMCO2015@ds062097.mongolab.com:62097/golf";
-var golferDB = mongojs(uri, ['golfer_reservation_requests']);
-var courseDB = mongojs(uri, ['course_reservation_requests']);
+// var uri = "mongodb://pacific-brook-1:HackMCO2015@ds062097.mongolab.com:62097/golf";
+// var golferDB = mongojs(uri, ['golfer_reservation_requests']);
+// var courseDB = mongojs(uri, ['course_reservation_requests']);
 
 
 // //while connected to a client
-// io.on('connection', function(socket) {
+io.on('connection', function(socket) {
 
-// 	socket.on('reservation.sent', function(data){
-
-
+	socket.on('reservation.sent', function(data){
 
 
 
 
-// 		// golferDB.golfer_reservation_requests.findAndModify({
-//   //           query: {_id:mongojs.ObjectId(doc.caseId)},
-//   //           update: { $push: {"reservation_requests":doc._id}}
-//   //       });
-// 	});
 
 
-// 	socket.on('reservations.get.golfer', function(data){});
+		// golferDB.golfer_reservation_requests.findAndModify({
+  //           query: {_id:mongojs.ObjectId(doc.caseId)},
+  //           update: { $push: {"reservation_requests":doc._id}}
+  //       });
+	});
 
 
-// 	socket.on('reservations.get.course', function(data){});
+	socket.on('reservations.get.golfer', function(data){});
 
-// });
+
+	socket.on('reservations.get.course', function(data){});
+
+});

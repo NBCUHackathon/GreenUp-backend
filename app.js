@@ -247,6 +247,7 @@ function filterTeeTimes(getReq, userData){
 			// console.log("a");
 			var date = new Date(Date.parse(teeTime.Time)).valueOf;
 			if((date >= userData.start.valueOf()) && (date <= userData.end.valueOf())){
+				console.log("passed date");
 				var temp = {
 						status:"pending",
 						name:golfCourse.Name,

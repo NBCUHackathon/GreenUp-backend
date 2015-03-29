@@ -106,6 +106,7 @@ io.on('connection', function(socket) {
                 }
 
                 if (tee.status === "pending") {
+                	tee.price = parseFloat(tee.price).fixed(2);
                     pending.push(tee);
                 }
 
@@ -266,6 +267,41 @@ io.on('connection', function(socket) {
         );
     });
 
+
+	socket.on('accept.reservation',function(data){
+		// golferDB.golfer_reservation_requests.find({
+  //           "token": data.token
+  //       }, function(err, docs) {
+
+  //           docs[0].reservation_requests.forEach(function(element){
+
+
+  //           });
+
+  //       });
+
+        // golferDB.golfer_reservation_requests.find( { "token": data.token },
+        //          { reservation_requests: { $elemMatch: { date:data.date,time:data.time } } }, function );
+
+        db.bar.update( {"token" : data.token , "reservation_requests.date" : data.date, "reservation_requests.time" : data.time} , 
+                {$set : {"reservation_requests.status" : "accepted"} } , 
+                false , 
+                true);
+
+        twil();
+
+
+	});
+
+	socket.on('reject.reservation',function(data){
+
+		db.bar.update( {"token" : data.token , "reservation_requests.date" : data.date, "reservation_requests.time" : data.time} , 
+                {$set : {"reservation_requests.status" : "declined"} } , 
+                false , 
+                true);
+
+        twil();
+	});
     // socket.on('test', function(data){
     // 	socket.emit('ack', ßdata);
     // });

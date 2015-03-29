@@ -101,7 +101,7 @@ io.on('connection', function(socket) {
 			});
 		}
 
-		socket.emit('send.reservations.golfer.accepted', accepted);
+		socket.emit('accepted', accepted);
 		socket.emit('send.reservations.golfer.pending', pending);
 		socket.emit('send.reservations.golfer.declined', declined);
 
@@ -111,6 +111,10 @@ io.on('connection', function(socket) {
 
 	}
 
+
+	socket.on('facilities.getAll', function(data){
+
+	});
 
 	socket.on('reservations.get.course', function(data){});
 

@@ -217,6 +217,7 @@ io.on('connection', function(socket) {
             function(error, response, body) {
                 if (!error && response.statusCode == 200) {
                     // console.log("sending : "+ body);
+                    body = JSON.parse(body);
                     console.log(body);
                     socket.emit('facility.receiveZipFromLatLon', {
                         lat: body.latitude,
@@ -242,9 +243,8 @@ io.on('connection', function(socket) {
                 if (!error && response.statusCode == 200) {
                     // console.log("sending : "+ body);
                     console.log("sending example");
-                    console.log(body);
                     socket.emit('facilities.receiveFacilitiesByLatLonRange', {
-                        facilities: body
+                        facilities: JSON.parse(body);
                     });
 
                 }

@@ -246,9 +246,10 @@ io.on('connection', function(socket) {
                     console.log("sending example");
                     var filteredData = [];
                     console.log('looking for '+ data.zip);
-                    console.log('found '+ body[iterator]);
-                    console.log('at '+ iterator);
+                    
                     for(iterator in body) {
+                    	console.log('found '+ body[iterator]);
+                    	console.log('at '+ iterator);
                     	if (body[iterator].Address.PostalCode == data.zip) {
                     		console.log('FOUND MATCH');
                     		filteredData.push(body[iterator]);

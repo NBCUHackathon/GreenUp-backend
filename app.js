@@ -243,7 +243,7 @@ io.on('connection', function(socket) {
                     // console.log("sending : "+ body);
                     body = JSON.parse(body);
                     console.log(Object.keys(body).length);
-                    console.log("sending example");git
+                    console.log("sending example");
                     var filteredData = [];
                     console.log('looking for '+ data.zip);
                     console.log('found '+ body[iterator]);

@@ -287,15 +287,19 @@ function filterTeeTimes(getReq, userData) {
 
             //         });
             // }
-            console.log(teeTime.Time + "<-->" + userData.start)
+            // console.log(teeTime.Time + "<-->" + userData.start)
             var date = teeTime.Time.split('T')[0];
             var time = teeTime.Time.split('T')[1];
+
+            console.log(date + "::::" + userData.date);
 
             if (date === userData.date) {
                 // console.log("b");
                 var courseTimeSplit = time.split(':');
                 var golferStartTimeSplit = userData.start.split(':');
                 var golferEndTimeSplit = userData.end.split(':');
+
+                console.log(courseTimeSplit + "****" + golferStartTimeSplit + "****" + golferEndTimeSplit);
 
                 var courseSeconds = (parseInt(courseTimeSplit[0]) * 60 * 60) + (parseInt(courseTimeSplit[1]) * 60) + parseInt(courseTimeSplit[2]);
                 var golferStartSeconds = (parseInt(golferStartTimeSplit[0]) * 60 * 60) + (parseInt(golferStartTimeSplit[1]) * 60) + parseInt(golferStartTimeSplit[2]);
@@ -373,9 +377,10 @@ function twil() {
 client.sms.messages.create({
     body: "All in the game, yo",
     to: "+14075908293",
-    from: "+15005550006"
+    from: "+13212343680"
 }, function(err, sms) {
     // process.stdout.write(sms.sid);
+    console.log(err + " in");
 });
-
+console.log("twilio");
 }

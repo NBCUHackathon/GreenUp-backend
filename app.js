@@ -45,7 +45,7 @@ io.on('connection', function(socket) {
 
         data.token = socket.username;
         data.token = "sdbf78ybf78bf7bf7896dfn987fgny7dfgn78dfgn7bfsuoybiuyfgy79dfgn678fdn6789dfgn7689dfg6779dfgn67dfgn";
-        console.log(data.token);
+        // console.log(data.token);
         //sends the yo back with a link
         request.get({
                 uri: 'https://sandbox.api.gnsvc.com/rest/channel/17652/facilities?q=geo-location&latitude=28.4158&longitude=-81.2989&proximity=25&expand=FacilityDetail.Ratesets',
@@ -77,7 +77,7 @@ io.on('connection', function(socket) {
         golferDB.golfer_reservation_requests.findOne({
             "token": "sdbf78ybf78bf7bf7896dfn987fgny7dfgn78dfgn7bfsuoybiuyfgy79dfgn678fdn6789dfgn7689dfg6779dfgn67dfgn"
         }, function(err,doc) {
-        	console.log(JSON.stringify(doc));
+        	// console.log(JSON.stringify(doc));
             sendSorted(doc);
             // socket.emit('send.reservations.golfer.accepted', "accepted");
             // socket.emit('send.reservations.golfer.pending', "pending");
@@ -98,7 +98,7 @@ io.on('connection', function(socket) {
 
         // golferDB.golfer_reservation_requests.findOne({"token":"hi"}, function(doc){
         if (data != null) {
-            console.log("not null");
+            // console.log("not null");
             data.reservation_requests.forEach(function(tee) {
 
                 if (tee.status === "accepted") {
@@ -119,7 +119,7 @@ io.on('connection', function(socket) {
         socket.emit('send.reservations.golfer.accepted', accepted);
         socket.emit('send.reservations.golfer.pending', pending);
         socket.emit('send.reservations.golfer.declined', declined);
-        console.log("sent?");
+        // console.log("sent?");
 
         // });
 
@@ -134,50 +134,6 @@ io.on('connection', function(socket) {
 
     socket.on('auth.user', function(data) {
 
-        // console.log("halp")
-        // request.post(
-        //     {
-        //     	uri:'https://sandbox.api.gnsvc.com/rest/customers/' + data.userEmail + '/authentication-token?timeout=30',
-        //      	headers: { 'UserName': "Hackathon_Development",
-        //               	'Password': "6YBkHF86ut7946pDwZhp",
-        //           		"Access-Control-Allow-Origin": "*"},
-        //         form: {
-        // 			"EMail": data.userEmail,
-        // 			"Password": data.password
-        // 		}
-
-        //  },
-        //     function (error, response, body) {
-        //         if (!error && response.statusCode == 200) {
-        //             console.log(body);
-        //             if(body === "Invalid login."){
-        //             	socket.emit('auth.tokenDenied');
-        //             }else{
-        //             	socket.username = body;
-
-        // 				var temp = {
-        // 					"token":body,
-        // 					"reservation_requests":[]
-        // 				}
-
-        // 				golferDB.golfer_reservation_requests.find({"token":body}, function(docs){
-
-        // 					if(docs.length == 0){
-        // 						golferDB.golfer_reservation_requests.save(temp);
-        // 					}
-
-        // 				});
-        // 					// golferDB.golfer_reservation_requests.save(temp);
-
-        // 				socket.emit('auth.tokenReceived', body);								            	
-        //             }
-        //         }
-
-        //         console.log(response.statusCode + " " + error);
-        //     }
-        // );
-
-        // socket.emit('auth.tokenReceived', "hi");
 
         socket.username = tokens[tokenGen];
 
@@ -205,7 +161,7 @@ io.on('connection', function(socket) {
     });
 
     socket.on('facilities.getLatLonFromZip', function(data) {
-        console.log('get lat/lon request received');
+        // console.log('get lat/lon request received');
         request.get({
                 uri: 'https://sandbox.api.gnsvc.com/rest/lookups/postal-codes/' + data.zip + '/geographic-information',
                 headers: {
@@ -218,7 +174,7 @@ io.on('connection', function(socket) {
                 if (!error && response.statusCode == 200) {
                     // console.log("sending : "+ body);
                     body = JSON.parse(body);
-                    console.log(body[0]);
+                    // console.log(body[0]);
                     socket.emit('facilities.receiveZipFromLatLon', {
                         lat: body.Latitude,
                         lon: body.Longitude
@@ -230,7 +186,7 @@ io.on('connection', function(socket) {
 
     socket.on('facilities.getFacilityByLatLonAndRange', function(data) {
         //sends the yo back with a link
-        console.log("got data. searching lat: " + data.lat + " lon: " + data.lon + " range: " + data.range);
+        // console.log("got data. searching lat: " + data.lat + " lon: " + data.lon + " range: " + data.range);
         request.get({
                 uri: 'https://sandbox.api.gnsvc.com/rest/channel/17652/facilities?q=geo-location&latitude=' + data.lat + '&longitude=' + data.lon + '&proximity=' + data.range,
                 headers: {
@@ -243,23 +199,18 @@ io.on('connection', function(socket) {
                 if (!error && response.statusCode == 200) {
                     // console.log("sending : "+ body);
                     body = JSON.parse(body);
-                    console.log(Object.keys(body).length);
-                    console.log("sending example");
-                    console.log(body[5].Address);
-                    var filteredData = [];
-                    console.log('looking for '+ data.zip);
-                    for(iterator in body) {
-                    	if (body[iterator].Address.PostalCode == data.zip) {
+                    // console.log(Object.keys(body).length);
+                    // console.log('first '+ body[0]);
+                    // for(iterator in body) {
+                    // 	if (body[iterator].Address.PostalCode == data.zip) {
                     		console.log('FOUND MATCH');
-                    		filteredData.push(body[iterator]);
-                    	}
-                    }
-                    console.log('looking for '+ data.zip);
+                    // 		filteredData.push(body[iterator]);
+                    // 	}
+                    // }
+                    // console.log('looking for '+ data.zip);
 
-                    console.log(filteredData);
-                    console.log(body[Object.keys(filteredData).length-1]);
                     socket.emit('facilities.receiveFacilitiesByLatLonRange', {
-                        facilities: filteredData
+                        facilities: body
                     });
 
                 }
@@ -322,7 +273,7 @@ function filterTeeTimes(getReq, userData) {
             // console.log("a");
             // var date = new Date(Date.parse(teeTime.Time)).valueOf;
             // if((date >= userData.start.valueOf()) && (date <= userData.end.valueOf())){
-            // 	console.log("passed date");
+            	console.log("passed date");
             // 	var temp = {
             // 			status:"pending",
             // 			name:golfCourse.Name,
@@ -334,7 +285,7 @@ function filterTeeTimes(getReq, userData) {
             // 		golferDB.golfer_reservation_requests.update({"token":userData.token},{ $push: {"reservation_requests":temp}},
             //         	{new:true}
             //         ,function(err, doc){
-            //         	console.log("help"+doc);
+                    	console.log("help"+doc);
 
 
 
@@ -355,14 +306,14 @@ function filterTeeTimes(getReq, userData) {
                 var golferStartTimeSplit = userData.start.split('T')[1].split(':');
                 var golferEndTimeSplit = userData.end.split('T')[1].split(':');
 
-                //console.log(courseTimeSplit + "****" + golferStartTimeSplit + "****" + golferEndTimeSplit);
+                console.log(courseTimeSplit + "****" + golferStartTimeSplit + "****" + golferEndTimeSplit);
 
                 var courseSeconds = (parseInt(courseTimeSplit[0]) * 60 * 60) + (parseInt(courseTimeSplit[1]) * 60) + parseInt(courseTimeSplit[2]);
                 var golferStartSeconds = (parseInt(golferStartTimeSplit[0]) * 60 * 60) + (parseInt(golferStartTimeSplit[1]) * 60) + parseInt(golferStartTimeSplit[2]);
                 var golferEndSeconds = (parseInt(golferEndTimeSplit[0]) * 60 * 60) + (parseInt(golferEndTimeSplit[1]) * 60) + parseInt(golferEndTimeSplit[2]);
-                //console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
+                console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
                 if (courseSeconds >= golferStartSeconds && courseSeconds <= golferEndSeconds) {
-                    //console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
+                    console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
                     
                     var priceMax = Math.max(Math.max(teeTime.DisplayRate.SinglePlayerPrice.DueAtCourse.Value,teeTime.DisplayRate.SinglePlayerPrice.DueOnline.Value),Math.max(teeTime.DisplayRate.SinglePlayerPrice.GreensFees.Value,teeTime.DisplayRate.SinglePlayerPrice.TaxesAndFees.Value))
                     // console.log("PRICEMAX: " + priceMax);
@@ -439,7 +390,7 @@ function twil() {
 //             body: "Test text message",
 //         },
 //         function(err, message) {
-//             console.log(sms.sid);
+            console.log(sms.sid);
 //         });
 // }
 
@@ -457,7 +408,7 @@ client.sms.messages.create({
     from: "+13212343680"
 }, function(err, sms) {
     // process.stdout.write(sms.sid);
-    console.log(err + " in");
+    // console.log(err + " in");
 });
-console.log("twilio");
+// console.log("twilio");
 }

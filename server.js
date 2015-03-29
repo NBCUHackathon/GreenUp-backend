@@ -6,8 +6,8 @@ var io = require('socket.io')(server);
 var mongojs = require('mongojs');
 var request = require('request');
 
-// var port = process.env.PORT || 3000;
-var port = 3000;
+var port = process.env.PORT || 3000;
+// var port = 3000;
 
 var uri = "mongodb://master:golf@ds062097.mongolab.com:62097/golf";
 var golferDB = mongojs(uri, ['golfer_reservation_requests']);

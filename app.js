@@ -224,7 +224,7 @@ io.on('connection', function(socket) {
 		        if (!error && response.statusCode == 200) {
 		        	// console.log("sending : "+ body);
 		            // console.log(body);
-		           	socket.emit('facility.receiveFacilitiesByLatLonRange', {facilities: body});
+		           	socket.emit('facilities.receiveFacilitiesByLatLonRange', {facilities: body});
 
 		        }
 		    }
@@ -266,15 +266,15 @@ function filterTeeTimes(getReq, userData){
 
 			//         });
 			// }
-
+			console.log(teeTime.Time + "<-->" + userData.start)
 			var date = teeTime.Time.split('T')[0];
 			var time = teeTime.Time.split('T')[1];
 
 			if(date === userData.date){
 				// console.log("b");
 				var courseTimeSplit = time.split(':');
-				var golferStartTimeSplit = userData.startTime.split(':');
-				var golferEndTimeSplit = userData.endTime.split(':');
+				var golferStartTimeSplit = userData.start.split(':');
+				var golferEndTimeSplit = userData.end.split(':');
 
 				var courseSeconds = (courseTimeSplit[0]*60*60)+(courseTimeSplit[1]*60)+courseTimeSplit[2];
 				var golferStartSeconds = (golferStartTimeSplit[0]*60*60)+(golferStartTimeSplit[1]*60)+golferStartTimeSplit[2];
@@ -318,3 +318,11 @@ function filterTeeTimes(getReq, userData){
 	});
 
 }
+
+// Twilio Credentials 
+var accountSid = 'AC5c58512b18c1c3f4ee2c0e386bee48f6'; 
+var authToken = '[AuthToken]'; 
+//require the Twilio module and create a REST client 
+var client = require('twilio')(accountSid, authToken); 
+client.messages.create({ to: "407-590-8293", from: "+13212343680", body: "Test text message", }, 
+	function(err, message) { console.log(message.sid); });

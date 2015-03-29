@@ -193,6 +193,45 @@ io.on('connection', function(socket) {
 
 	});
 
+	socket.on("facilities.getAllInCountry", function(data) {
+		console.log('received request for getallincoutry');
+		request.get(
+		    uri:"https://sandbox.api.gnsvc.com/rest/channel/17652/facilities?q=list&skip=0&take=5000&expand=",
+		    headers: { 'UserName': "Hackathon_Development",
+		              	'Password': "6YBkHF86ut7946pDwZhp",
+		          		"Access-Control-Allow-Origin": "*"}
+		 },
+		    function (error, response, body) {
+		        if (!error && response.statusCode == 200) {
+		        	console.log("sending : "+ body);
+		            console.log(body);
+		           	socket.emit('facility.receiveAllInCountry', {facilities: body});
+
+		        }
+		    }
+		);
+	});
+
+	socket.on('facilities.getFacilityByLatLonAndRange', function(data){
+		//sends the yo back with a link
+		console.log("got data. searching lat: "+ data.lat  + " lon: "+ data.lon + " range: "+ data.range);
+		request.get(
+		    uri:'https://sandbox.api.gnsvc.com/rest/channel/17652/facilities?q=geo-location&latitude='+data.lat+'&longitude='+data.lon+'&proximity='+range,
+		    headers: { 'UserName': "Hackathon_Development",
+		              	'Password': "6YBkHF86ut7946pDwZhp",
+		          		"Access-Control-Allow-Origin": "*"}
+		 },
+		    function (error, response, body) {
+		        if (!error && response.statusCode == 200) {
+		        	console.log("sending : "+ body);
+		            console.log(body);
+		           	socket.emit('facility.receiveFacilitiesByLatLonRange', {facilities: body});
+
+		        }
+		    }
+		);
+	});
+
 	// socket.on('test', function(data){
 	// 	socket.emit('ack', ßdata);
 	// });

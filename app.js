@@ -130,7 +130,7 @@ io.on('connection', function(socket) {
 			"reservation_requests":[]
 		}
 		
-		golferDB.golfer_reservation_requests.find({"token":tokens[tokenGen]}, function(docs){
+		golferDB.golfer_reservation_requests.find({"token":tokens[tokenGen]}, function(err, docs){
 
 			if(docs.length == 0){
 				golferDB.golfer_reservation_requests.save(temp);

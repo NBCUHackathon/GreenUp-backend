@@ -48,7 +48,7 @@ io.on('connection', function(socket) {
 		    function (error, response, body) {
 		        if (!error && response.statusCode == 200) {
 		            // console.log(body);
-		            filterTeeTimes(parseJSON(body), data);
+		            filterTeeTimes(JSON.parse(body), data);
 		        }
 		    }
 		);

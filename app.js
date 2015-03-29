@@ -82,24 +82,24 @@ io.on('connection', function(socket) {
 		var declined = [];
 
 		// golferDB.golfer_reservation_requests.findOne({"token":"hi"}, function(doc){
-		if(data != null){
-			console.log("not null");
-			data.reservation_requests.forEach(function(tee){
+		// if(data != null){
+		// 	console.log("not null");
+		// 	data.reservation_requests.forEach(function(tee){
 
-				if(tee.status === "accepted"){
-					accepted.push(tee);
-				}
+		// 		if(tee.status === "accepted"){
+		// 			accepted.push(tee);
+		// 		}
 
-				if(tee.status === "pending"){
-					pending.push(tee);
-				}
+		// 		if(tee.status === "pending"){
+		// 			pending.push(tee);
+		// 		}
 
-				if(tee.status === "declined"){
-					declined.push(tee);
-				}
+		// 		if(tee.status === "declined"){
+		// 			declined.push(tee);
+		// 		}
 
-			});
-		}
+		// 	});
+		// }
 
 		socket.emit('accepted', accepted);
 		socket.emit('send.reservations.golfer.pending', pending);

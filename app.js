@@ -248,14 +248,14 @@ io.on('connection', function(socket) {
                     var filteredData = [];
                     console.log('looking for '+ data.zip);
                     for(iterator in body) {
-                    	console.log(body[iterator].Address.PostalCode);
+                    	console.log('FOUND MATCH');
                     	if (body[iterator].Address.PostalCode == data.zip) {
                     		filteredData.push(body[iterator]);
                     	}
                     }
                     console.log('looking for '+ data.zip);
-                    
-                    console.log(filteredData[1]);
+
+                    console.log(filteredData[0]);
                     console.log(body[Object.keys(filteredData).length-1]);
                     socket.emit('facilities.receiveFacilitiesByLatLonRange', {
                         facilities: filteredData

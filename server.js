@@ -68,6 +68,8 @@ request.get(
 // //while connected to a client
 io.on('connection', function(socket) {
 
+	socket.emit('auth.tokenReceived', "hi");
+
 	socket.on('reservation.sent', function(data){
 
 

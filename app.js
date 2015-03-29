@@ -217,7 +217,7 @@ io.on('connection', function(socket) {
                 if (!error && response.statusCode == 200) {
                     // console.log("sending : "+ body);
                     body = JSON.parse(body);
-                    console.log(body);
+                    console.log(body[1]);
                     socket.emit('facilities.receiveZipFromLatLon', {
                         lat: body.latitude,
                         lon: body.longitude

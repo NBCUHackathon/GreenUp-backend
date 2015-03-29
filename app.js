@@ -244,7 +244,7 @@ io.on('connection', function(socket) {
                     // console.log("sending : "+ body);
                     console.log("sending example");
                     socket.emit('facilities.receiveFacilitiesByLatLonRange', {
-                        facilities: JSON.parse(body);
+                        facilities: JSONparse(body)
                     });
 
                 }

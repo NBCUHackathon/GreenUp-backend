@@ -298,8 +298,8 @@ function filterTeeTimes(getReq, userData) {
             if (date === userDate) {
                 // console.log("b");
                 var courseTimeSplit = time.split(':');
-                var golferStartTimeSplit = userData.start..split('T')[1].split(':');
-                var golferEndTimeSplit = userData.end..split('T')[1].split(':');
+                var golferStartTimeSplit = userData.start.split('T')[1].split(':');
+                var golferEndTimeSplit = userData.end.split('T')[1].split(':');
 
                 console.log(courseTimeSplit + "****" + golferStartTimeSplit + "****" + golferEndTimeSplit);
 

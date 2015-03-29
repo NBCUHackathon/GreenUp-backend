@@ -77,9 +77,9 @@ io.on('connection', function(socket) {
 
 	function sendSorted(data){
 
-		var accepted = [];
-		var pending = [];
-		var declined = [];
+		var accepted = "[]";
+		var pending = "f";
+		var declined = "f";
 
 		// golferDB.golfer_reservation_requests.findOne({"token":"hi"}, function(doc){
 		// if(data != null){
@@ -101,7 +101,7 @@ io.on('connection', function(socket) {
 		// 	});
 		// }
 
-		socket.emit('accepted', accepted);
+		socket.emit('send.reservations.golfer.accepted', accepted);
 		socket.emit('send.reservations.golfer.pending', pending);
 		socket.emit('send.reservations.golfer.declined', declined);
 

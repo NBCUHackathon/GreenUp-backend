@@ -291,6 +291,8 @@ function filterTeeTimes(getReq, userData) {
             var date = teeTime.Time.split('T')[0];
             var time = teeTime.Time.split('T')[1];
 
+            console.log(date + "::::" + userData.date);
+
             if (date === userData.date) {
                 // console.log("b");
                 var courseTimeSplit = time.split(':');

@@ -246,7 +246,8 @@ io.on('connection', function(socket) {
                     console.log("sending example");
                     var filteredData = [];
                     for(iterator in body) {
-                    	if (body[iterator].Address.zipCode == data.zip) {
+                    	console.log(body[iterator].Address.PostalCode);
+                    	if (body[iterator].Address.PostalCode == data.zip) {
                     		filteredData.push(body[iterator]);
                     	}
                     }

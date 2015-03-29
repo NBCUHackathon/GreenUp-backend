@@ -208,7 +208,7 @@ function filterTeeTimes(getReq, userData){
 			teeTime.name = golfCourse.Name;
 			// console.log("a");
 			var date = new Date(Date.parse(teeTime.Time));
-			if(date >= userData.start && date =< userData.end){
+			if(date.valueOf() >= userData.start.valueOf() && date.valueOf() =< userData.end.valueOf()){
 				var temp = {
 						status:"pending",
 						name:golfCourse.Name,

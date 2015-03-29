@@ -217,10 +217,10 @@ io.on('connection', function(socket) {
                 if (!error && response.statusCode == 200) {
                     // console.log("sending : "+ body);
                     body = JSON.parse(body);
-                    console.log(body);
-                    socket.emit('facility.receiveZipFromLatLon', {
-                        lat: body.latitude,
-                        lon: body.longitude
+                    console.log(body[0]);
+                    socket.emit('facilities.receiveZipFromLatLon', {
+                        lat: body.Latitude,
+                        lon: body.Longitude
                     });
                 }
             }

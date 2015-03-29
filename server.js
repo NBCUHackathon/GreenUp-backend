@@ -14,7 +14,7 @@ var golferDB = mongojs(uri, ['golfer_reservation_requests']);
 var courseDB = mongojs(uri, ['course_reservation_requests']);
 
 
-app.get('/', function(req, res){
+app.get('/connect', function(req, res){
 
 	res.statusCode = 200;
 	//...

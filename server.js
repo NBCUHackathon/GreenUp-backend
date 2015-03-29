@@ -157,9 +157,9 @@ io.on('connection', function(socket) {
 
 	});
 
-	socket.on('test', function(data){
-		socket.emit('ack', {data});
-	});
+	// socket.on('test', function(data){
+	// 	socket.emit('ack', data);
+	// });
 
 });
 

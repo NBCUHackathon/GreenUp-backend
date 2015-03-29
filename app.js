@@ -244,6 +244,7 @@ io.on('connection', function(socket) {
                     body = JSON.parse(body);
                     console.log(Object.keys(body).length);
                     console.log("sending example");
+                    console.log(body[5].Address);
                     var filteredData = [];
                     for(iterator in body) {
                     	console.log(body[iterator].Address.PostalCode);

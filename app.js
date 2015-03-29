@@ -38,7 +38,7 @@ io.on('connection', function(socket) {
 
 		data.token = socket.username;
 		data.token = "sdbf78ybf78bf7bf7896dfn987fgny7dfgn78dfgn7bfsuoybiuyfgy79dfgn678fdn6789dfgn7689dfg6779dfgn67dfgn";
-		console.log(socket.username);
+		console.log(data.token);
 		//sends the yo back with a link
 		request.get(
 		    {

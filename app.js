@@ -306,14 +306,14 @@ function filterTeeTimes(getReq, userData) {
                 var golferStartTimeSplit = userData.start.split('T')[1].split(':');
                 var golferEndTimeSplit = userData.end.split('T')[1].split(':');
 
-                console.log(courseTimeSplit + "****" + golferStartTimeSplit + "****" + golferEndTimeSplit);
+                // console.log(courseTimeSplit + "****" + golferStartTimeSplit + "****" + golferEndTimeSplit);
 
                 var courseSeconds = (parseInt(courseTimeSplit[0]) * 60 * 60) + (parseInt(courseTimeSplit[1]) * 60) + parseInt(courseTimeSplit[2]);
                 var golferStartSeconds = (parseInt(golferStartTimeSplit[0]) * 60 * 60) + (parseInt(golferStartTimeSplit[1]) * 60) + parseInt(golferStartTimeSplit[2]);
                 var golferEndSeconds = (parseInt(golferEndTimeSplit[0]) * 60 * 60) + (parseInt(golferEndTimeSplit[1]) * 60) + parseInt(golferEndTimeSplit[2]);
-                console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
+                // console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
                 if (courseSeconds >= golferStartSeconds && courseSeconds <= golferEndSeconds) {
-                    console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
+                    // console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
                     
                     var priceMax = Math.max(Math.max(teeTime.DisplayRate.SinglePlayerPrice.DueAtCourse.Value,teeTime.DisplayRate.SinglePlayerPrice.DueOnline.Value),Math.max(teeTime.DisplayRate.SinglePlayerPrice.GreensFees.Value,teeTime.DisplayRate.SinglePlayerPrice.TaxesAndFees.Value))
                     // console.log("PRICEMAX: " + priceMax);

@@ -320,9 +320,9 @@ function filterTeeTimes(getReq, userData){
 }
 
 // Twilio Credentials 
-var accountSid = 'AC5c58512b18c1c3f4ee2c0e386bee48f6'; 
-var authToken = '[AuthToken]'; 
-//require the Twilio module and create a REST client 
-var client = require('twilio')(accountSid, authToken); 
-client.messages.create({ to: "407-590-8293", from: "+13212343680", body: "Test text message", }, 
-	function(err, message) { console.log(message.sid); });
+// var accountSid = 'AC5c58512b18c1c3f4ee2c0e386bee48f6'; 
+// var authToken = '[AuthToken]'; 
+// //require the Twilio module and create a REST client 
+// var client = require('twilio')(accountSid, authToken); 
+// client.messages.create({ to: "407-590-8293", from: "+15005550006", body: "Test text message", }, 
+// 	function(err, message) { console.log(message.sid); });

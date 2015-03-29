@@ -112,7 +112,7 @@ io.on('connection', function(socket) {
 
 	socket.on('auth.user', function(data){
 
-
+		console.log("halp")
 		// request.post(
 		//     {
 		//     	uri:'https://sandbox.api.gnsvc.com/rest/customers/' + data.userEmail + '/authentication-token?timeout=30',

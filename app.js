@@ -68,11 +68,11 @@ io.on('connection', function(socket) {
 
 		golferDB.golfer_reservation_requests.findOne({"token":"sdbf78ybf78bf7bf7896dfn987fgny7dfgn78dfgn7bfsuoybiuyfgy79dfgn678fdn6789dfgn7689dfg6779dfgn67dfgn"}, function(doc){
 
-			// sendSorted(doc);
-			socket.emit('send.reservations.golfer.accepted', "accepted");
-			socket.emit('send.reservations.golfer.pending', "pending");
-			socket.emit('send.reservations.golfer.declined', "declined");
-			socket.emit('ack',"yes");
+			sendSorted(doc);
+			// socket.emit('send.reservations.golfer.accepted', "accepted");
+			// socket.emit('send.reservations.golfer.pending', "pending");
+			// socket.emit('send.reservations.golfer.declined', "declined");
+			// socket.emit('ack',"yes");
 		});
 
 		// socket.emit('send.reservations.golfer.accepted', "accepted");
@@ -82,29 +82,29 @@ io.on('connection', function(socket) {
 
 	function sendSorted(data){
 
-		var accepted = "[]";
-		var pending = "f";
-		var declined = "f";
+		var accepted = [];
+		var pending = [];
+		var declined = [];
 
 		// golferDB.golfer_reservation_requests.findOne({"token":"hi"}, function(doc){
-		// if(data != null){
-		// 	console.log("not null");
-		// 	data.reservation_requests.forEach(function(tee){
+		if(data != null){
+			console.log("not null");
+			data.reservation_requests.forEach(function(tee){
 
-		// 		if(tee.status === "accepted"){
-		// 			accepted.push(tee);
-		// 		}
+				if(tee.status === "accepted"){
+					accepted.push(tee);
+				}
 
-		// 		if(tee.status === "pending"){
-		// 			pending.push(tee);
-		// 		}
+				if(tee.status === "pending"){
+					pending.push(tee);
+				}
 
-		// 		if(tee.status === "declined"){
-		// 			declined.push(tee);
-		// 		}
+				if(tee.status === "declined"){
+					declined.push(tee);
+				}
 
-		// 	});
-		// }
+			});
+		}
 
 		socket.emit('send.reservations.golfer.accepted', accepted);
 		socket.emit('send.reservations.golfer.pending', pending);

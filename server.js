@@ -6,8 +6,8 @@ var io = require('socket.io')(server);
 var mongojs = require('mongojs');
 var request = require('request');
 
-// var port = process.env.PORT || 3000;
-var port = 3000;
+var port = process.env.PORT || 3000;
+// var port = 3000;
 
 var uri = "mongodb://master:golf@ds062097.mongolab.com:62097/golf";
 var golferDB = mongojs(uri, ['golfer_reservation_requests']);
@@ -110,15 +110,48 @@ io.on('connection', function(socket) {
 
 	socket.on('reservations.get.course', function(data){});
 
-	socket.on('receive.token', function(data){
+	socket.on('auth.user', function(data){
 
-		socket.username = data;
-		var temp = {
-			"token":data,
-			"reservation_requests":[]
-		}
-		golferDB.golfer_reservation_requests.save(temp);
 
+		request.post(
+		    {
+		    	uri:'https://sandbox.api.gnsvc.com/rest/customers/' + data.userEmail + '/authentication-token?timeout=30',
+		     	headers: { 'UserName': "Hackathon_Development",
+		              	'Password': "6YBkHF86ut7946pDwZhp",
+		          		"Access-Control-Allow-Origin": "*"},
+		        form: {
+					"EMail": data.userEmail,
+					"Password": data.password
+				}
+
+		 },
+		    function (error, response, body) {
+		        if (!error && response.statusCode == 200) {
+		            console.log(body);
+		            if(body === "Invalid login."){
+		            	socket.emit('auth.tokenDenied');
+		            }else{
+		            	socket.username = body;
+
+						var temp = {
+							"token":body,
+							"reservation_requests":[]
+						}
+						
+						golferDB.golfer_reservation_requests.find({"token":body}, function(docs){
+
+							if(docs.length == 0){
+								golferDB.golfer_reservation_requests.save(temp);
+							}
+
+						});
+							// golferDB.golfer_reservation_requests.save(temp);
+
+						socket.emit('auth.tokenReceived', body);								            	
+		            }
+		        }
+		    }
+		);
 
 	});
 

@@ -242,9 +242,12 @@ io.on('connection', function(socket) {
             function(error, response, body) {
                 if (!error && response.statusCode == 200) {
                     // console.log("sending : "+ body);
+                    body = JSON.parse(body);
+                    console.log(Object.keys(body).length);
                     console.log("sending example");
+                    console.log(body[1]);
                     socket.emit('facilities.receiveFacilitiesByLatLonRange', {
-                        facilities: JSON.parse(body)
+                        facilities: body
                     });
 
                 }

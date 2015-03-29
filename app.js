@@ -274,6 +274,10 @@ io.on('connection', function(socket) {
 
 function filterTeeTimes(getReq, userData) {
 
+	var autoAccepted = [];
+
+	var twilFlag = true;
+
     getReq.forEach(function(golfCourse) {
 
         golfCourse.Ratesets.Value.forEach(function(teeTime) {
@@ -315,21 +319,42 @@ function filterTeeTimes(getReq, userData) {
                 var golferStartTimeSplit = userData.start.split('T')[1].split(':');
                 var golferEndTimeSplit = userData.end.split('T')[1].split(':');
 
-                console.log(courseTimeSplit + "****" + golferStartTimeSplit + "****" + golferEndTimeSplit);
+                //console.log(courseTimeSplit + "****" + golferStartTimeSplit + "****" + golferEndTimeSplit);
 
                 var courseSeconds = (parseInt(courseTimeSplit[0]) * 60 * 60) + (parseInt(courseTimeSplit[1]) * 60) + parseInt(courseTimeSplit[2]);
                 var golferStartSeconds = (parseInt(golferStartTimeSplit[0]) * 60 * 60) + (parseInt(golferStartTimeSplit[1]) * 60) + parseInt(golferStartTimeSplit[2]);
                 var golferEndSeconds = (parseInt(golferEndTimeSplit[0]) * 60 * 60) + (parseInt(golferEndTimeSplit[1]) * 60) + parseInt(golferEndTimeSplit[2]);
                 //console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
                 if (courseSeconds >= golferStartSeconds && courseSeconds <= golferEndSeconds) {
-                    console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
-                    var temp = {
-                        status: "pending",
-                        name: golfCourse.Name,
-                        maxPrice: userData.maxPrice,
-                        date: teeTime.Time.split('T')[0],
-                        time: teeTime.Time.split('T')[1]
-                    }
+                    //console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
+                    
+                    var priceMax = Math.max(Math.max(teeTime.DisplayRate.SinglePlayerPrice.DueAtCourse.Value,teeTime.DisplayRate.SinglePlayerPrice.DueOnline.Value),Math.max(teeTime.DisplayRate.SinglePlayerPrice.GreensFees.Value,teeTime.DisplayRate.SinglePlayerPrice.TaxesAndFees.Value))
+
+                    if(priceMax <= userData.maxPrice){
+	                    var temp = {
+	                        status: "accepted",
+	                        name: golfCourse.Name,
+	                        price: priceMax,
+	                        date: teeTime.Time.split('T')[0],
+	                        time: teeTime.Time.split('T')[1]
+	                    }
+	                    if(twilFlag){
+	                    	twilFlag = false;
+	                    	twil();
+	                    }
+
+	                }else{
+	                	var temp = {
+	                        status: "pending",
+	                        name: golfCourse.Name,
+	                        price: userData.maxPrice,
+	                        date: teeTime.Time.split('T')[0],
+	                        time: teeTime.Time.split('T')[1]
+	                    }
+	                }
+
+
+
 
                     golferDB.golfer_reservation_requests.update({
                         "token": userData.token

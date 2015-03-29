@@ -248,8 +248,8 @@ io.on('connection', function(socket) {
                     var filteredData = [];
                     console.log('looking for '+ data.zip);
                     for(iterator in body) {
-                    	console.log('FOUND MATCH');
                     	if (body[iterator].Address.PostalCode == data.zip) {
+                    		console.log('FOUND MATCH');
                     		filteredData.push(body[iterator]);
                     	}
                     }

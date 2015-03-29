@@ -244,10 +244,21 @@ io.on('connection', function(socket) {
                     body = JSON.parse(body);
                     console.log(Object.keys(body).length);
                     console.log("sending example");
-                    console.log(body[1]);
-                    console.log(body[Object.keys(body).length-1]);
+                    console.log(body[5].Address);
+                    var filteredData = [];
+                    console.log('looking for '+ data.zip);
+                    for(iterator in body) {
+                    	if (body[iterator].Address.PostalCode == data.zip) {
+                    		console.log('FOUND MATCH');
+                    		filteredData.push(body[iterator]);
+                    	}
+                    }
+                    console.log('looking for '+ data.zip);
+
+                    console.log(filteredData);
+                    console.log(body[Object.keys(filteredData).length-1]);
                     socket.emit('facilities.receiveFacilitiesByLatLonRange', {
-                        facilities: body
+                        facilities: filteredData
                     });
 
                 }

@@ -41,7 +41,7 @@ io.on('connection', function(socket) {
 
     socket.on('reservation.sent', function(data) {
 
-        twil();
+        // twil();
 
         data.token = socket.username;
         data.token = "sdbf78ybf78bf7bf7896dfn987fgny7dfgn78dfgn7bfsuoybiuyfgy79dfgn678fdn6789dfgn7689dfg6779dfgn67dfgn";
@@ -291,13 +291,15 @@ function filterTeeTimes(getReq, userData) {
             var date = teeTime.Time.split('T')[0];
             var time = teeTime.Time.split('T')[1];
 
-            console.log(date + "::::" + userData.date);
+            var userDate = userData.start.split('T')[0];
 
-            if (date === userData.date) {
+            console.log(date + "::::" + userDate);
+
+            if (date === userDate) {
                 // console.log("b");
                 var courseTimeSplit = time.split(':');
-                var golferStartTimeSplit = userData.start.split(':');
-                var golferEndTimeSplit = userData.end.split(':');
+                var golferStartTimeSplit = userData.start..split('T')[1].split(':');
+                var golferEndTimeSplit = userData.end..split('T')[1].split(':');
 
                 console.log(courseTimeSplit + "****" + golferStartTimeSplit + "****" + golferEndTimeSplit);
 
@@ -375,7 +377,7 @@ function twil() {
 
 
 client.sms.messages.create({
-    body: "All in the game, yo",
+    body: "One or more of your offers has been reviewed! Open My-Tee to see your offers!",
     to: "+14075908293",
     from: "+13212343680"
 }, function(err, sms) {

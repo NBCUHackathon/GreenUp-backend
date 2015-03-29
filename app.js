@@ -241,6 +241,8 @@ function sendSorted(data,socket){
 	socket.emit('send.reservations.golfer.pending', pending);
 	socket.emit('send.reservations.golfer.declined', declined);
 
+	console.log("sent?");
+
 						// });
 
 }

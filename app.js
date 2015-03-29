@@ -287,7 +287,7 @@ function filterTeeTimes(getReq, userData) {
 
             //         });
             // }
-            console.log(teeTime.Time + "<-->" + userData.start)
+            // console.log(teeTime.Time + "<-->" + userData.start)
             var date = teeTime.Time.split('T')[0];
             var time = teeTime.Time.split('T')[1];
 

@@ -327,7 +327,7 @@ function filterTeeTimes(getReq, userData) {
 	                    }
 	                    if(twilFlag){
 	                    	twilFlag = false;
-	                    	// twil();
+	                    	twil();
 	                    }
 
 	                }else{

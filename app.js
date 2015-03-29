@@ -246,12 +246,15 @@ io.on('connection', function(socket) {
                     console.log("sending example");
                     console.log(body[5].Address);
                     var filteredData = [];
+                    console.log('looking for '+ data.zip);
                     for(iterator in body) {
                     	console.log(body[iterator].Address.PostalCode);
                     	if (body[iterator].Address.PostalCode == data.zip) {
                     		filteredData.push(body[iterator]);
                     	}
                     }
+                    console.log('looking for '+ data.zip);
+                    
                     console.log(filteredData[1]);
                     console.log(body[Object.keys(filteredData).length-1]);
                     socket.emit('facilities.receiveFacilitiesByLatLonRange', {

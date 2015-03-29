@@ -143,7 +143,7 @@ io.on('connection', function(socket) {
 		// 					"token":body,
 		// 					"reservation_requests":[]
 		// 				}
-						
+
 		// 				golferDB.golfer_reservation_requests.find({"token":body}, function(docs){
 
 		// 					if(docs.length == 0){
@@ -153,7 +153,7 @@ io.on('connection', function(socket) {
 		// 				});
 		// 					// golferDB.golfer_reservation_requests.save(temp);
 
-		// 				socket.emit('auth.tokenReceived', body);								            	
+		// 				socket.emit('auth.tokenReceived', body);
 		//             }
 		//         }
 		//     }
@@ -161,9 +161,28 @@ io.on('connection', function(socket) {
 
 		socket.emit('auth.tokenReceived', "hi");
 
+		socket.on("facilities.getAllInCountry", function(data) {
+			console.log('received request for getallincoutry');
+			request.get(
+			    uri:"https://sandbox.api.gnsvc.com/rest/channel/17652/facilities?q=list&skip=0&take=5000&expand=",
+			    headers: { 'UserName': "Hackathon_Development",
+			              	'Password': "6YBkHF86ut7946pDwZhp",
+			          		"Access-Control-Allow-Origin": "*"}
+			 },
+			    function (error, response, body) {
+			        if (!error && response.statusCode == 200) {
+			        	console.log("sending : "+ body);
+			            console.log(body);
+			           	socket.emit('facility.receiveAllInCountry', {facilities: body});
+
+			        }
+			    }
+			);
+		});
+
 		socket.on('facilities.getFacilityByLatLonAndRange', function(data){
 			//sends the yo back with a link
-			console.log("got searching lat: "+ data.lat  + " lon: "+ data.lon + " range: "+ data.range);
+			console.log("got data. searching lat: "+ data.lat  + " lon: "+ data.lon + " range: "+ data.range);
 			request.get(
 			    uri:'https://sandbox.api.gnsvc.com/rest/channel/17652/facilities?q=geo-location&latitude='+data.lat+'&longitude='+data.lon+'&proximity='+range,
 			    headers: { 'UserName': "Hackathon_Development",
@@ -174,7 +193,7 @@ io.on('connection', function(socket) {
 			        if (!error && response.statusCode == 200) {
 			        	console.log("sending : "+ body);
 			            console.log(body);
-			           	socket.emit('facility.sendFacilitiesByLatLonRange', {facilities: body});
+			           	socket.emit('facility.receiveFacilitiesByLatLonRange', {facilities: body});
 
 			        }
 			    }
@@ -183,9 +202,9 @@ io.on('connection', function(socket) {
 
 	});
 
-	// socket.on('test', function(data){
-	// 	socket.emit('ack', ßdata);
-	// });
+	socket.on('test', function(data){
+		socket.emit('ack', data);
+	});
 
 });
 

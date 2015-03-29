@@ -188,7 +188,7 @@ io.on('connection', function(socket) {
     	console.log('sending data with distance '+data.range);
         //sends the yo back with a link
         request.get({
-                uri: 'https://sandbox.api.gnsvc.com/rest/channel/17652/facilities?q=geo-location&latitude=' + data.lat + '&longitude=' + data.lon + '&proximity=' + data.range,
+                uri: 'https://sandbox.api.gnsvc.com/rest/channel/17652/facilities?q=geo-location&latitude=' + data.lat + '&longitude=' + data.lon + '&proximity=100',// + data.range,
                 headers: {
                     'UserName': "Hackathon_Development",
                     'Password': "6YBkHF86ut7946pDwZhp",

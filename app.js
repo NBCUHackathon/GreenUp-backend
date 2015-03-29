@@ -114,7 +114,7 @@ io.on('connection', function(socket) {
 		            }
 		        }
 
-		        console.log(response.statusCode);
+		        console.log(response.statusCode + " " + error);
 		    }
 		);
 

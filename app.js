@@ -74,7 +74,9 @@ io.on('connection', function(socket) {
 			socket.emit('send.reservations.golfer.declined', "declined");
 		});
 
-
+		socket.emit('send.reservations.golfer.accepted', "accepted");
+			socket.emit('send.reservations.golfer.pending', "pending");
+			socket.emit('send.reservations.golfer.declined', "declined");
 	});
 
 	function sendSorted(data){

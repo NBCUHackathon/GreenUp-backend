@@ -113,45 +113,47 @@ io.on('connection', function(socket) {
 	socket.on('auth.user', function(data){
 
 
-		request.post(
-		    {
-		    	uri:'https://sandbox.api.gnsvc.com/rest/customers/' + data.userEmail + '/authentication-token?timeout=30',
-		     	headers: { 'UserName': "Hackathon_Development",
-		              	'Password': "6YBkHF86ut7946pDwZhp",
-		          		"Access-Control-Allow-Origin": "*"},
-		        form: {
-					"EMail": data.userEmail,
-					"Password": data.password
-				}
+		// request.post(
+		//     {
+		//     	uri:'https://sandbox.api.gnsvc.com/rest/customers/' + data.userEmail + '/authentication-token?timeout=30',
+		//      	headers: { 'UserName': "Hackathon_Development",
+		//               	'Password': "6YBkHF86ut7946pDwZhp",
+		//           		"Access-Control-Allow-Origin": "*"},
+		//         form: {
+		// 			"EMail": data.userEmail,
+		// 			"Password": data.password
+		// 		}
 
-		 },
-		    function (error, response, body) {
-		        if (!error && response.statusCode == 200) {
-		            console.log(body);
-		            if(body === "Invalid login."){
-		            	socket.emit('auth.tokenDenied');
-		            }else{
-		            	socket.username = body;
+		//  },
+		//     function (error, response, body) {
+		//         if (!error && response.statusCode == 200) {
+		//             console.log(body);
+		//             if(body === "Invalid login."){
+		//             	socket.emit('auth.tokenDenied');
+		//             }else{
+		//             	socket.username = body;
 
-						var temp = {
-							"token":body,
-							"reservation_requests":[]
-						}
+		// 				var temp = {
+		// 					"token":body,
+		// 					"reservation_requests":[]
+		// 				}
 						
-						golferDB.golfer_reservation_requests.find({"token":body}, function(docs){
+		// 				golferDB.golfer_reservation_requests.find({"token":body}, function(docs){
 
-							if(docs.length == 0){
-								golferDB.golfer_reservation_requests.save(temp);
-							}
+		// 					if(docs.length == 0){
+		// 						golferDB.golfer_reservation_requests.save(temp);
+		// 					}
 
-						});
-							// golferDB.golfer_reservation_requests.save(temp);
+		// 				});
+		// 					// golferDB.golfer_reservation_requests.save(temp);
 
-						socket.emit('auth.tokenReceived', body);								            	
-		            }
-		        }
-		    }
-		);
+		// 				socket.emit('auth.tokenReceived', body);								            	
+		//             }
+		//         }
+		//     }
+		// );
+
+		socket.emit('auth.tokenReceived', "hi");
 
 	});
 

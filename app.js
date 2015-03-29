@@ -255,7 +255,7 @@ io.on('connection', function(socket) {
                     }
                     console.log('looking for '+ data.zip);
 
-                    console.log(filteredData[0]);
+                    console.log(filteredData);
                     console.log(body[Object.keys(filteredData).length-1]);
                     socket.emit('facilities.receiveFacilitiesByLatLonRange', {
                         facilities: filteredData

@@ -37,6 +37,7 @@ io.on('connection', function(socket) {
 	socket.on('reservation.sent', function(data){
 
 		data.token = socket.username;
+		console.log(socket.username);
 		//sends the yo back with a link
 		request.get(
 		    {

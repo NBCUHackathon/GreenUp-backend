@@ -16,6 +16,10 @@ var courseDB = mongojs(uri, ['course_reservation_requests']);
 
 app.get('/', function(req, res){
 
+	res.statusCode = 200;
+	//...
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	golferDB.golfer_reservation_requests.find({},function(err,docs){
 
 		var html = "";

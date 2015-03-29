@@ -185,10 +185,10 @@ io.on('connection', function(socket) {
     });
 
     socket.on('facilities.getFacilityByLatLonAndRange', function(data) {
+    	console.log('sending data with distance '+data.range);
         //sends the yo back with a link
-        // console.log("got data. searching lat: " + data.lat + " lon: " + data.lon + " range: " + data.range);
         request.get({
-                uri: 'https://sandbox.api.gnsvc.com/rest/channel/17652/facilities?q=geo-location&latitude=' + data.lat + '&longitude=' + data.lon + '&proximity=' + data.range,
+                uri: 'https://sandbox.api.gnsvc.com/rest/channel/17652/facilities?q=geo-location&latitude=' + data.lat + '&longitude=' + data.lon + '&proximity='+data.range,
                 headers: {
                     'UserName': "Hackathon_Development",
                     'Password': "6YBkHF86ut7946pDwZhp",
@@ -197,17 +197,7 @@ io.on('connection', function(socket) {
             },
             function(error, response, body) {
                 if (!error && response.statusCode == 200) {
-                    // console.log("sending : "+ body);
                     body = JSON.parse(body);
-                    // console.log(Object.keys(body).length);
-                    // console.log('first '+ body[0]);
-                    // for(iterator in body) {
-                    // 	if (body[iterator].Address.PostalCode == data.zip) {
-                    		console.log('FOUND MATCH');
-                    // 		filteredData.push(body[iterator]);
-                    // 	}
-                    // }
-                    // console.log('looking for '+ data.zip);
 
                     socket.emit('facilities.receiveFacilitiesByLatLonRange', {
                         facilities: body

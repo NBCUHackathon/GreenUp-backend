@@ -245,10 +245,16 @@ io.on('connection', function(socket) {
                     body = JSON.parse(body);
                     console.log(Object.keys(body).length);
                     console.log("sending example");
-                    console.log(body[1]);
-                    console.log(body[Object.keys(body).length-1]);
+                    var filteredData = [];
+                    for(iterator in body) {
+                    	if (body[iterator].Address.zipCode == data.zip) {
+                    		filteredData.push(body[iterator]);
+                    	}
+                    }
+                    console.log(filteredData[1]);
+                    console.log(body[Object.keys(filteredData).length-1]);
                     socket.emit('facilities.receiveFacilitiesByLatLonRange', {
-                        facilities: body
+                        facilities: filteredData
                     });
 
                 }

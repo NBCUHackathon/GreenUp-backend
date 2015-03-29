@@ -185,7 +185,7 @@ io.on('connection', function(socket) {
     });
 
     socket.on('facilities.getFacilityByLatLonAndRange', function(data) {
-    	console.log('sending data with distance '+data.range);
+    	// console.log('sending data with distance '+data.range);
         //sends the yo back with a link
         request.get({
                 uri: 'https://sandbox.api.gnsvc.com/rest/channel/17652/facilities?q=geo-location&latitude=' + data.lat + '&longitude=' + data.lon + '&proximity='+data.range,
@@ -263,7 +263,7 @@ function filterTeeTimes(getReq, userData) {
             // console.log("a");
             // var date = new Date(Date.parse(teeTime.Time)).valueOf;
             // if((date >= userData.start.valueOf()) && (date <= userData.end.valueOf())){
-            	console.log("passed date");
+            	// console.log("passed date");
             // 	var temp = {
             // 			status:"pending",
             // 			name:golfCourse.Name,
@@ -369,27 +369,7 @@ function filterTeeTimes(getReq, userData) {
 }
 
 function twil() {
-    // Twilio Credentials 
-//     var accountSid = 'AC5c58512b18c1c3f4ee2c0e386bee48f6';
-//     var authToken = 'dc8840fa46616237c602b5386eea45eb';
-//     //require the Twilio module and create a REST client 
-//     var client = require('twilio')(accountSid, authToken);
-//     client.sms.messages.create({
-//             to: "+14075908293",
-//             from: "+15005550006",
-//             body: "Test text message",
-//         },
-//         function(err, message) {
-            console.log(sms.sid);
-//         });
-// }
 
-
-// Download the Node helper library from twilio.com/docs/node/install
-// These vars are your accountSid and authToken from twilio.com/user/account
-// var accountSid = 'AC5c58512b18c1c3f4ee2c0e386bee48f6';
-// var authToken = "dc8840fa46616237c602b5386eea45eb";
-// var client = require('twilio')(accountSid, authToken);
 
 
 client.sms.messages.create({

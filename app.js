@@ -115,7 +115,6 @@ io.on('connection', function(socket) {
 
             });
         }
-
         socket.emit('send.reservations.golfer.accepted', accepted);
         socket.emit('send.reservations.golfer.pending', pending);
         socket.emit('send.reservations.golfer.declined', declined);
@@ -322,7 +321,7 @@ function filterTeeTimes(getReq, userData) {
                     var temp = {
                         status: "pending",
                         name: golfCourse.Name,
-                        cost: userData.cost,
+                        maxPrice: userData.maxPrice,
                         date: teeTime.Time.split('T')[0],
                         time: teeTime.Time.split('T')[1]
                     }

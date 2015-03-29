@@ -39,7 +39,7 @@ io.on('connection', function(socket) {
 
     socket.on('reservation.sent', function(data) {
 
-    	twil();
+        twil();
 
         data.token = socket.username;
         data.token = "sdbf78ybf78bf7bf7896dfn987fgny7dfgn78dfgn7bfsuoybiuyfgy79dfgn678fdn6789dfgn7689dfg6779dfgn67dfgn";
@@ -295,9 +295,9 @@ function filterTeeTimes(getReq, userData) {
                 var golferStartTimeSplit = userData.start.split(':');
                 var golferEndTimeSplit = userData.end.split(':');
 
-                var courseSeconds = (courseTimeSplit[0] * 60 * 60) + (courseTimeSplit[1] * 60) + courseTimeSplit[2];
-                var golferStartSeconds = (golferStartTimeSplit[0] * 60 * 60) + (golferStartTimeSplit[1] * 60) + golferStartTimeSplit[2];
-                var golferEndSeconds = (golferEndTimeSplit[0] * 60 * 60) + (golferEndTimeSplit[1] * 60) + golferEndTimeSplit[2];
+                var courseSeconds = (parseInt(courseTimeSplit[0]) * 60 * 60) + (parseInt(courseTimeSplit[1]) * 60) + parseInt(courseTimeSplit[2]);
+                var golferStartSeconds = (parseInt(golferStartTimeSplit[0]) * 60 * 60) + (parseInt(golferStartTimeSplit[1]) * 60) + parseInt(golferStartTimeSplit[2]);
+                var golferEndSeconds = (parseInt(golferEndTimeSplit[0]) * 60 * 60) + (parseInt(golferEndTimeSplit[1]) * 60) + parseInt(golferEndTimeSplit[2]);
 
                 if (courseSeconds >= golferStartSeconds && courseSeconds <= golferEndSeconds) {
                     // console.log("mongo");
@@ -344,18 +344,36 @@ function filterTeeTimes(getReq, userData) {
 
 }
 
-function twil(){
-	// Twilio Credentials 
-	var accountSid = 'AC5c58512b18c1c3f4ee2c0e386bee48f6';
-	var authToken = 'dc8840fa46616237c602b5386eea45eb';
-	//require the Twilio module and create a REST client 
-	var client = require('twilio')(accountSid, authToken);
-	client.sms.messages.create({
-	        to: "+14075908293",
-	        from: "+15005550006",
-	        body: "Test text message",
-	    },
-	    function(err, message) {
-	        console.log(sms.sid);
-	    });
+function twil() {
+    // Twilio Credentials 
+//     var accountSid = 'AC5c58512b18c1c3f4ee2c0e386bee48f6';
+//     var authToken = 'dc8840fa46616237c602b5386eea45eb';
+//     //require the Twilio module and create a REST client 
+//     var client = require('twilio')(accountSid, authToken);
+//     client.sms.messages.create({
+//             to: "+14075908293",
+//             from: "+15005550006",
+//             body: "Test text message",
+//         },
+//         function(err, message) {
+//             console.log(sms.sid);
+//         });
+// }
+
+
+// Download the Node helper library from twilio.com/docs/node/install
+// These vars are your accountSid and authToken from twilio.com/user/account
+var accountSid = 'AC5c58512b18c1c3f4ee2c0e386bee48f6';
+var authToken = "{{ auth_token }}";
+var client = require('twilio')(accountSid, authToken);
+
+
+client.sms.messages.create({
+    body: "All in the game, yo",
+    to: "+14108675309",
+    from: "+15005550006"
+}, function(err, sms) {
+    process.stdout.write(sms.sid);
+});
+
 }

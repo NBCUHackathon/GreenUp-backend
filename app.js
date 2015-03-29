@@ -189,14 +189,14 @@ io.on('connection', function(socket) {
 		socket.emit('auth.tokenReceived', tokens[tokenGen]);	
 
 		tokenGen++;
-		tokenGen = tokenGen%2;							
+		tokenGen = tokenGen%2;
 
 	});
 
-	socket.on("facilities.getAllInCountry", function(data) {
-		console.log('received request for getallincoutry');
+	socket.on('facilities.getLatLonFromZip', function(data) {
+		console.log('get lat/lon request received');
 		request.get({
-		    uri:"https://sandbox.api.gnsvc.com/rest/channel/17652/facilities?q=list&skip=0&take=5000&expand=",
+		    uri:'https://sandbox.api.gnsvc.com/rest/lookups/postal-codes/'+data.zip+'/geographic-information',
 		    headers: { 'UserName': "Hackathon_Development",
 		              	'Password': "6YBkHF86ut7946pDwZhp",
 		          		"Access-Control-Allow-Origin": "*"}
@@ -204,9 +204,8 @@ io.on('connection', function(socket) {
 		    function (error, response, body) {
 		        if (!error && response.statusCode == 200) {
 		        	// console.log("sending : "+ body);
-		            // console.log(body);
-		           	socket.emit('facility.receiveAllInCountry', {facilities: body});
-
+		            console.log(body);
+		           	socket.emit('facility.receiveZipFromLatLon', {lat: body.latitude, lon: body.longitude});
 		        }
 		    }
 		);

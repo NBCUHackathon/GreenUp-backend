@@ -133,50 +133,6 @@ io.on('connection', function(socket) {
 
     socket.on('auth.user', function(data) {
 
-        // console.log("halp")
-        // request.post(
-        //     {
-        //     	uri:'https://sandbox.api.gnsvc.com/rest/customers/' + data.userEmail + '/authentication-token?timeout=30',
-        //      	headers: { 'UserName': "Hackathon_Development",
-        //               	'Password': "6YBkHF86ut7946pDwZhp",
-        //           		"Access-Control-Allow-Origin": "*"},
-        //         form: {
-        // 			"EMail": data.userEmail,
-        // 			"Password": data.password
-        // 		}
-
-        //  },
-        //     function (error, response, body) {
-        //         if (!error && response.statusCode == 200) {
-        //             console.log(body);
-        //             if(body === "Invalid login."){
-        //             	socket.emit('auth.tokenDenied');
-        //             }else{
-        //             	socket.username = body;
-
-        // 				var temp = {
-        // 					"token":body,
-        // 					"reservation_requests":[]
-        // 				}
-
-        // 				golferDB.golfer_reservation_requests.find({"token":body}, function(docs){
-
-        // 					if(docs.length == 0){
-        // 						golferDB.golfer_reservation_requests.save(temp);
-        // 					}
-
-        // 				});
-        // 					// golferDB.golfer_reservation_requests.save(temp);
-
-        // 				socket.emit('auth.tokenReceived', body);								            	
-        //             }
-        //         }
-
-        //         console.log(response.statusCode + " " + error);
-        //     }
-        // );
-
-        // socket.emit('auth.tokenReceived', "hi");
 
         socket.username = tokens[tokenGen];
 
@@ -243,22 +199,17 @@ io.on('connection', function(socket) {
                     // console.log("sending : "+ body);
                     body = JSON.parse(body);
                     console.log(Object.keys(body).length);
-                    console.log("sending example");
-                    var filteredData = [];
-                    console.log('looking for '+ data.zip);
                     console.log('first '+ body[0]);
-                    for(iterator in body) {
-                    	if (body[iterator].Address.PostalCode == data.zip) {
-                    		console.log('FOUND MATCH');
-                    		filteredData.push(body[iterator]);
-                    	}
-                    }
+                    // for(iterator in body) {
+                    // 	if (body[iterator].Address.PostalCode == data.zip) {
+                    // 		console.log('FOUND MATCH');
+                    // 		filteredData.push(body[iterator]);
+                    // 	}
+                    // }
                     console.log('looking for '+ data.zip);
 
-                    console.log(filteredData);
-                    console.log(body[Object.keys(filteredData).length-1]);
                     socket.emit('facilities.receiveFacilitiesByLatLonRange', {
-                        facilities: filteredData
+                        facilities: body
                     });
 
                 }

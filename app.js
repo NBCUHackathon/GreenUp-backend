@@ -220,7 +220,7 @@ function filterTeeTimes(getReq, userData){
 					golferDB.golfer_reservation_requests.update({"token":userData.token},{ $push: {"reservation_requests":temp}},
 			        	{new:true}
 			        ,function(err, doc){
-			        	// console.log("help"+doc);
+			        	console.log("help"+doc);
 
 
 			      

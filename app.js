@@ -113,6 +113,8 @@ io.on('connection', function(socket) {
 						socket.emit('auth.tokenReceived', body);								            	
 		            }
 		        }
+
+		        console.log(response.statusCode);
 		    }
 		);
 

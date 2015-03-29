@@ -141,7 +141,8 @@ io.on('connection', function(socket) {
 
 		socket.emit('auth.tokenReceived', tokens[tokenGen]);	
 
-		tokenGen++;							
+		tokenGen++;
+		tokenGen = tokenGen%2;							
 
 	});
 

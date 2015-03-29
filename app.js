@@ -106,7 +106,7 @@ io.on('connection', function(socket) {
                 }
 
                 if (tee.status === "pending") {
-                	tee.price = parseFloat(tee.price).fixed(2);
+                	tee.price = (tee.price).toFixed(2);
                     pending.push(tee);
                 }
 

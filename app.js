@@ -216,7 +216,7 @@ io.on('connection', function(socket) {
 		//sends the yo back with a link
 		console.log("got data. searching lat: "+ data.lat  + " lon: "+ data.lon + " range: "+ data.range);
 		request.get({
-		    uri:'https://sandbox.api.gnsvc.com/rest/channel/17652/facilities?q=geo-location&latitude='+data.lat+'&longitude='+data.lon+'&proximity='+range,
+		    uri:'https://sandbox.api.gnsvc.com/rest/channel/17652/facilities?q=geo-location&latitude='+data.lat+'&longitude='+data.lon+'&proximity='+data.range,
 		    headers: { 'UserName': "Hackathon_Development",
 		              	'Password': "6YBkHF86ut7946pDwZhp",
 		          		"Access-Control-Allow-Origin": "*"}

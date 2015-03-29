@@ -306,7 +306,7 @@ function filterTeeTimes(getReq, userData) {
                 var courseSeconds = (parseInt(courseTimeSplit[0]) * 60 * 60) + (parseInt(courseTimeSplit[1]) * 60) + parseInt(courseTimeSplit[2]);
                 var golferStartSeconds = (parseInt(golferStartTimeSplit[0]) * 60 * 60) + (parseInt(golferStartTimeSplit[1]) * 60) + parseInt(golferStartTimeSplit[2]);
                 var golferEndSeconds = (parseInt(golferEndTimeSplit[0]) * 60 * 60) + (parseInt(golferEndTimeSplit[1]) * 60) + parseInt(golferEndTimeSplit[2]);
-
+                console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
                 if (courseSeconds >= golferStartSeconds && courseSeconds <= golferEndSeconds) {
                     console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
                     var temp = {

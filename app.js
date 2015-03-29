@@ -243,9 +243,11 @@ io.on('connection', function(socket) {
                     // console.log("sending : "+ body);
                     body = JSON.parse(body);
                     console.log(Object.keys(body).length);
-                    console.log("sending example");
+                    console.log("sending example");git
                     var filteredData = [];
                     console.log('looking for '+ data.zip);
+                    console.log('found '+ body[iterator]);
+                    console.log('at '+ iterator);
                     for(iterator in body) {
                     	if (body[iterator].Address.PostalCode == data.zip) {
                     		console.log('FOUND MATCH');

@@ -119,7 +119,6 @@ io.on('connection', function(socket) {
         socket.emit('send.reservations.golfer.accepted', accepted);
         socket.emit('send.reservations.golfer.pending', pending);
         socket.emit('send.reservations.golfer.declined', declined);
-
         console.log("sent?");
 
         // });
@@ -242,7 +241,8 @@ io.on('connection', function(socket) {
             function(error, response, body) {
                 if (!error && response.statusCode == 200) {
                     // console.log("sending : "+ body);
-                    // console.log(body);
+                    console.log("sending example");
+                    console.log(body);
                     socket.emit('facilities.receiveFacilitiesByLatLonRange', {
                         facilities: body
                     });

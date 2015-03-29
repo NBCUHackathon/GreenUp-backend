@@ -2,7 +2,9 @@
 SAVVYSERVER
 */
 
-
+var accountSid = 'AC5c58512b18c1c3f4ee2c0e386bee48f6';
+var authToken = "dc8840fa46616237c602b5386eea45eb";
+var client = require('twilio')(accountSid, authToken);
 //Server Init Stuff
 var http = require("http");
 var server = http.createServer(requestHandler);
@@ -363,9 +365,9 @@ function twil() {
 
 // Download the Node helper library from twilio.com/docs/node/install
 // These vars are your accountSid and authToken from twilio.com/user/account
-var accountSid = 'AC5c58512b18c1c3f4ee2c0e386bee48f6';
-var authToken = "{{ auth_token }}";
-var client = require('twilio')(accountSid, authToken);
+// var accountSid = 'AC5c58512b18c1c3f4ee2c0e386bee48f6';
+// var authToken = "dc8840fa46616237c602b5386eea45eb";
+// var client = require('twilio')(accountSid, authToken);
 
 
 client.sms.messages.create({
@@ -373,7 +375,7 @@ client.sms.messages.create({
     to: "+14108675309",
     from: "+15005550006"
 }, function(err, sms) {
-    process.stdout.write(sms.sid);
+    // process.stdout.write(sms.sid);
 });
 
 }

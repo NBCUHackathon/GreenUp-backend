@@ -37,6 +37,7 @@ io.on('connection', function(socket) {
 	socket.on('reservation.sent', function(data){
 
 		data.token = socket.username;
+		data.token = "sdbf78ybf78bf7bf7896dfn987fgny7dfgn78dfgn7bfsuoybiuyfgy79dfgn678fdn6789dfgn7689dfg6779dfgn67dfgn";
 		console.log(socket.username);
 		//sends the yo back with a link
 		request.get(
@@ -65,7 +66,7 @@ io.on('connection', function(socket) {
 
 	socket.on('reservations.get.golfer', function(data){
 
-		golferDB.golfer_reservation_requests.findOne({"token":socket.username}, function(doc){
+		golferDB.golfer_reservation_requests.findOne({"token":"sdbf78ybf78bf7bf7896dfn987fgny7dfgn78dfgn7bfsuoybiuyfgy79dfgn678fdn6789dfgn7689dfg6779dfgn67dfgn"}, function(doc){
 
 			sendSorted(doc,socket);
 

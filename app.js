@@ -203,8 +203,8 @@ io.on('connection', function(socket) {
 		 },
 		    function (error, response, body) {
 		        if (!error && response.statusCode == 200) {
-		        	console.log("sending : "+ body);
-		            console.log(body);
+		        	// console.log("sending : "+ body);
+		            // console.log(body);
 		           	socket.emit('facility.receiveAllInCountry', {facilities: body});
 
 		        }
@@ -223,8 +223,8 @@ io.on('connection', function(socket) {
 		 },
 		    function (error, response, body) {
 		        if (!error && response.statusCode == 200) {
-		        	console.log("sending : "+ body);
-		            console.log(body);
+		        	// console.log("sending : "+ body);
+		            // console.log(body);
 		           	socket.emit('facility.receiveFacilitiesByLatLonRange', {facilities: body});
 
 		        }

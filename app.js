@@ -68,11 +68,16 @@ io.on('connection', function(socket) {
 
 		golferDB.golfer_reservation_requests.findOne({"token":"sdbf78ybf78bf7bf7896dfn987fgny7dfgn78dfgn7bfsuoybiuyfgy79dfgn678fdn6789dfgn7689dfg6779dfgn67dfgn"}, function(doc){
 
-			sendSorted(doc,socket);
-
+			sendSorted(doc);
+			// socket.emit('send.reservations.golfer.accepted', "accepted");
+			// socket.emit('send.reservations.golfer.pending', "pending");
+			// socket.emit('send.reservations.golfer.declined', "declined");
+			// socket.emit('ack',"yes");
 		});
 
-
+		// socket.emit('send.reservations.golfer.accepted', "accepted");
+		// 	socket.emit('send.reservations.golfer.pending', "pending");
+		// 	socket.emit('send.reservations.golfer.declined', "declined");
 	});
 
 	function sendSorted(data){
@@ -101,7 +106,7 @@ io.on('connection', function(socket) {
 			});
 		}
 
-		socket.emit('accepted', accepted);
+		socket.emit('send.reservations.golfer.accepted', accepted);
 		socket.emit('send.reservations.golfer.pending', pending);
 		socket.emit('send.reservations.golfer.declined', declined);
 
@@ -202,22 +207,9 @@ function filterTeeTimes(getReq, userData){
 			teeTime.status = "pending";
 			teeTime.name = golfCourse.Name;
 			// console.log("a");
-			var date = teeTime.Time.split('T')[0];
-			var time = teeTime.Time.split('T')[1];
 
-			if(date === userData.date){
-				// console.log("b");
-				var courseTimeSplit = time.split(':');
-				var golferStartTimeSplit = userData.startTime.split(':');
-				var golferEndTimeSplit = userData.endTime.split(':');
-
-				var courseSeconds = (courseTimeSplit[0]*60*60)+(courseTimeSplit[1]*60)+courseTimeSplit[2];
-				var golferStartSeconds = (golferStartTimeSplit[0]*60*60)+(golferStartTimeSplit[1]*60)+golferStartTimeSplit[2];
-				var golferEndSeconds = (golferEndTimeSplit[0]*60*60)+(golferEndTimeSplit[1]*60)+golferEndTimeSplit[2];
-
-				if(courseSeconds >= golferStartSeconds && courseSeconds <= golferEndSeconds){	
-					// console.log("mongo");
-					var temp = {
+			if(new Date(teeTime.Time) >= userData.start && new Date(teeTime.Time) =< userData.end){
+				var temp = {
 						status:"pending",
 						name:golfCourse.Name,
 						cost:userData.price,
@@ -234,20 +226,54 @@ function filterTeeTimes(getReq, userData){
 			      
 
 			        });
-
-					//golferDB.golfer_reservation_requests.update({username:data.username}, {'$inc':{'clues':1}}, {'upsert':true});
-					// IF WE HAVE TIME TO HAVE ANOTHER DB FOR COURSES
-			        // courseDB.course_reservation_requests.findAndModify({
-			        //     query: {token:userData.token},
-			        //     update: { $push: {"reservation_requests":teeTime},
-			        // 	upsert: true}
-			        // });
-
-				}
-
-			}else{
-
 			}
+
+			// var date = teeTime.Time.split('T')[0];
+			// var time = teeTime.Time.split('T')[1];
+
+			// if(date === userData.date){
+			// 	// console.log("b");
+			// 	var courseTimeSplit = time.split(':');
+			// 	var golferStartTimeSplit = userData.startTime.split(':');
+			// 	var golferEndTimeSplit = userData.endTime.split(':');
+
+			// 	var courseSeconds = (courseTimeSplit[0]*60*60)+(courseTimeSplit[1]*60)+courseTimeSplit[2];
+			// 	var golferStartSeconds = (golferStartTimeSplit[0]*60*60)+(golferStartTimeSplit[1]*60)+golferStartTimeSplit[2];
+			// 	var golferEndSeconds = (golferEndTimeSplit[0]*60*60)+(golferEndTimeSplit[1]*60)+golferEndTimeSplit[2];
+
+			// 	if(courseSeconds >= golferStartSeconds && courseSeconds <= golferEndSeconds){	
+			// 		// console.log("mongo");
+			// 		var temp = {
+			// 			status:"pending",
+			// 			name:golfCourse.Name,
+			// 			cost:userData.price,
+			// 			date:teeTime.Time.split('T')[0],
+			// 			time:teeTime.Time.split('T')[1]
+			// 		}
+
+			// 		golferDB.golfer_reservation_requests.update({"token":userData.token},{ $push: {"reservation_requests":temp}},
+			//         	{new:true}
+			//         ,function(err, doc){
+			//         	// console.log("help"+doc);
+
+
+			      
+
+			//         });
+
+			// 		//golferDB.golfer_reservation_requests.update({username:data.username}, {'$inc':{'clues':1}}, {'upsert':true});
+			// 		// IF WE HAVE TIME TO HAVE ANOTHER DB FOR COURSES
+			//         // courseDB.course_reservation_requests.findAndModify({
+			//         //     query: {token:userData.token},
+			//         //     update: { $push: {"reservation_requests":teeTime},
+			//         // 	upsert: true}
+			//         // });
+
+			// 	}
+
+			// }else{
+
+			// }
 		});
 
 	});

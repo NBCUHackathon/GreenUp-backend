@@ -122,10 +122,14 @@ io.on('connection', function(socket) {
 
 	});
 
+	socket.on('test', function(data){
+		socket.emit('ack', {data});
+	});
+
 });
 
 function filterTeeTimes(getReq, userData){
-	
+
 	getReq.forEach(function (golfCourse) {
 
 		golfCourse.Ratesets.Value.forEach(function (teeTime){

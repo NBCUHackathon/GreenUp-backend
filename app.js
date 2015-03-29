@@ -77,7 +77,7 @@ io.on('connection', function(socket) {
         golferDB.golfer_reservation_requests.findOne({
             "token": "sdbf78ybf78bf7bf7896dfn987fgny7dfgn78dfgn7bfsuoybiuyfgy79dfgn678fdn6789dfgn7689dfg6779dfgn67dfgn"
         }, function(doc) {
-
+        	console.log(JSON.stringify(doc));
             sendSorted(doc);
             // socket.emit('send.reservations.golfer.accepted', "accepted");
             // socket.emit('send.reservations.golfer.pending', "pending");
@@ -312,7 +312,7 @@ function filterTeeTimes(getReq, userData) {
                     var temp = {
                         status: "pending",
                         name: golfCourse.Name,
-                        cost: userData.price,
+                        cost: userData.cost,
                         date: teeTime.Time.split('T')[0],
                         time: teeTime.Time.split('T')[1]
                     }

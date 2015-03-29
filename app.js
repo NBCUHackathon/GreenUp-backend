@@ -246,6 +246,7 @@ io.on('connection', function(socket) {
                     console.log(Object.keys(body).length);
                     console.log("sending example");
                     console.log(body[1]);
+                    console.log(body[Object.keys(body).length-1]);
                     socket.emit('facilities.receiveFacilitiesByLatLonRange', {
                         facilities: body
                     });

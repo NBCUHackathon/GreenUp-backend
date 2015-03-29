@@ -81,6 +81,7 @@ io.on('connection', function(socket) {
 
 		// golferDB.golfer_reservation_requests.findOne({"token":"hi"}, function(doc){
 		if(data != null){
+			console.log("not null");
 			data.reservation_requests.forEach(function(tee){
 
 				if(tee.status === "accepted"){

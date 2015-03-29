@@ -106,6 +106,7 @@ io.on('connection', function(socket) {
                 }
 
                 if (tee.status === "pending") {
+                	tee.price = (tee.price).toFixed(2);
                     pending.push(tee);
                 }
 
@@ -207,6 +208,41 @@ io.on('connection', function(socket) {
         );
     });
 
+
+	socket.on('accept.reservation',function(data){
+		// golferDB.golfer_reservation_requests.find({
+  //           "token": data.token
+  //       }, function(err, docs) {
+
+  //           docs[0].reservation_requests.forEach(function(element){
+
+
+  //           });
+
+  //       });
+
+        // golferDB.golfer_reservation_requests.find( { "token": data.token },
+        //          { reservation_requests: { $elemMatch: { date:data.date,time:data.time } } }, function );
+
+        db.bar.update( {"token" : data.token , "reservation_requests.date" : data.date, "reservation_requests.time" : data.time} , 
+                {$set : {"reservation_requests.status" : "accepted"} } , 
+                false , 
+                true);
+
+        twil();
+
+
+	});
+
+	socket.on('reject.reservation',function(data){
+
+		db.bar.update( {"token" : data.token , "reservation_requests.date" : data.date, "reservation_requests.time" : data.time} , 
+                {$set : {"reservation_requests.status" : "declined"} } , 
+                false , 
+                true);
+
+        twil();
+	});
     // socket.on('test', function(data){
     // 	socket.emit('ack', ßdata);
     // });
@@ -260,14 +296,14 @@ function filterTeeTimes(getReq, userData) {
                 var golferStartTimeSplit = userData.start.split('T')[1].split(':');
                 var golferEndTimeSplit = userData.end.split('T')[1].split(':');
 
-                console.log(courseTimeSplit + "****" + golferStartTimeSplit + "****" + golferEndTimeSplit);
+                // console.log(courseTimeSplit + "****" + golferStartTimeSplit + "****" + golferEndTimeSplit);
 
                 var courseSeconds = (parseInt(courseTimeSplit[0]) * 60 * 60) + (parseInt(courseTimeSplit[1]) * 60) + parseInt(courseTimeSplit[2]);
                 var golferStartSeconds = (parseInt(golferStartTimeSplit[0]) * 60 * 60) + (parseInt(golferStartTimeSplit[1]) * 60) + parseInt(golferStartTimeSplit[2]);
                 var golferEndSeconds = (parseInt(golferEndTimeSplit[0]) * 60 * 60) + (parseInt(golferEndTimeSplit[1]) * 60) + parseInt(golferEndTimeSplit[2]);
-                console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
+                // console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
                 if (courseSeconds >= golferStartSeconds && courseSeconds <= golferEndSeconds) {
-                    console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
+                    // console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
                     
                     var priceMax = Math.max(Math.max(teeTime.DisplayRate.SinglePlayerPrice.DueAtCourse.Value,teeTime.DisplayRate.SinglePlayerPrice.DueOnline.Value),Math.max(teeTime.DisplayRate.SinglePlayerPrice.GreensFees.Value,teeTime.DisplayRate.SinglePlayerPrice.TaxesAndFees.Value))
                     // console.log("PRICEMAX: " + priceMax);
@@ -281,7 +317,7 @@ function filterTeeTimes(getReq, userData) {
 	                    }
 	                    if(twilFlag){
 	                    	twilFlag = false;
-	                    	// twil();
+	                    	twil();
 	                    }
 
 	                }else{
@@ -357,7 +393,7 @@ function twil() {
 
 
 client.sms.messages.create({
-    body: "One or more of your offers has been reviewed! Open My-Tee to see your offers!",
+    body: "One or more of your offers has been reviewed! Open Green Up to see your offers! golfing.azurewebsites.net",
     to: "+14075908293",
     from: "+13212343680"
 }, function(err, sms) {

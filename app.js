@@ -78,7 +78,7 @@ io.on('connection', function(socket) {
 
 	socket.on('auth.user', function(data){
 
-		console.log("halp")
+		// console.log("halp")
 		// request.post(
 		//     {
 		//     	uri:'https://sandbox.api.gnsvc.com/rest/customers/' + data.userEmail + '/authentication-token?timeout=30',
@@ -178,7 +178,7 @@ function filterTeeTimes(getReq, userData){
 					var temp = {
 						status:"pending",
 						name:golfCourse.Name,
-						price:userData.price,
+						cost:userData.price,
 						date:teeTime.Time.split('T')[0],
 						time:teeTime.Time.split('T')[1]
 					}

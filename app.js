@@ -246,8 +246,8 @@ function filterTeeTimes(getReq, userData){
 			teeTime.status = "pending";
 			teeTime.name = golfCourse.Name;
 			// console.log("a");
-
-			if(new Date(teeTime.Time) >= userData.start && new Date(teeTime.Time) =< userData.end){
+			var date = new Date(Date.parse(teeTime.Time)).valueOf;
+			if((date >= userData.start.valueOf()) && (date <= userData.end.valueOf())){
 				var temp = {
 						status:"pending",
 						name:golfCourse.Name,
@@ -259,7 +259,7 @@ function filterTeeTimes(getReq, userData){
 					golferDB.golfer_reservation_requests.update({"token":userData.token},{ $push: {"reservation_requests":temp}},
 			        	{new:true}
 			        ,function(err, doc){
-			        	// console.log("help"+doc);
+			        	console.log("help"+doc);
 
 
 			      

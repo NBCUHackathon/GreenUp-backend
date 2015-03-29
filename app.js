@@ -329,7 +329,7 @@ function filterTeeTimes(getReq, userData) {
                     //console.log(courseSeconds+"^^^^"+golferStartSeconds+"^^^^"+golferEndSeconds);
                     
                     var priceMax = Math.max(Math.max(teeTime.DisplayRate.SinglePlayerPrice.DueAtCourse.Value,teeTime.DisplayRate.SinglePlayerPrice.DueOnline.Value),Math.max(teeTime.DisplayRate.SinglePlayerPrice.GreensFees.Value,teeTime.DisplayRate.SinglePlayerPrice.TaxesAndFees.Value))
-                    console.log("PRICEMAX: " + priceMax);
+                    // console.log("PRICEMAX: " + priceMax);
                     if(priceMax <= userData.maxPrice){
 	                    var temp = {
 	                        status: "accepted",
@@ -340,7 +340,7 @@ function filterTeeTimes(getReq, userData) {
 	                    }
 	                    if(twilFlag){
 	                    	twilFlag = false;
-	                    	twil();
+	                    	// twil();
 	                    }
 
 	                }else{

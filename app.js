@@ -36,7 +36,7 @@ io.on('connection', function(socket) {
 
 	socket.on('reservation.sent', function(data){
 
-
+		data.token = socket.username;
 		//sends the yo back with a link
 		request.get(
 		    {
@@ -246,38 +246,3 @@ function filterTeeTimes(getReq, userData){
 	});
 
 }
-
-// function sendSorted(data,socket){
-
-// 	var accepted = [];
-// 	var pending = [];
-// 	var declined = [];
-
-// 	// golferDB.golfer_reservation_requests.findOne({"token":"hi"}, function(doc){
-// 	if(data != null){
-// 		data.reservation_requests.forEach(function(tee){
-
-// 			if(tee.status === "accepted"){
-// 				accepted.push(tee);
-// 			}
-
-// 			if(tee.status === "pending"){
-// 				pending.push(tee);
-// 			}
-
-// 			if(tee.status === "declined"){
-// 				declined.push(tee);
-// 			}
-
-// 		});
-// 	}
-
-// 	socket.emit('send.reservations.golfer.accepted', accepted);
-// 	socket.emit('send.reservations.golfer.pending', pending);
-// 	socket.emit('send.reservations.golfer.declined', declined);
-
-// 	console.log("sent?");
-
-// 						// });
-
-// }

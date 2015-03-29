@@ -403,7 +403,7 @@ function twil() {
 
 
 client.sms.messages.create({
-    body: "One or more of your offers has been reviewed! Open My-Tee to see your offers!",
+    body: "One or more of your offers has been reviewed! Open Green Up to see your offers! golfing.azurewebsites.net",
     to: "+14075908293",
     from: "+13212343680"
 }, function(err, sms) {

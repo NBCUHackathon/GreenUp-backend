@@ -297,6 +297,8 @@ function filterTeeTimes(getReq, userData) {
                 var golferStartTimeSplit = userData.start.split(':');
                 var golferEndTimeSplit = userData.end.split(':');
 
+                console.log(courseTimeSplit + "****" + golferStartTimeSplit + "****" + golferEndTimeSplit);
+
                 var courseSeconds = (parseInt(courseTimeSplit[0]) * 60 * 60) + (parseInt(courseTimeSplit[1]) * 60) + parseInt(courseTimeSplit[2]);
                 var golferStartSeconds = (parseInt(golferStartTimeSplit[0]) * 60 * 60) + (parseInt(golferStartTimeSplit[1]) * 60) + parseInt(golferStartTimeSplit[2]);
                 var golferEndSeconds = (parseInt(golferEndTimeSplit[0]) * 60 * 60) + (parseInt(golferEndTimeSplit[1]) * 60) + parseInt(golferEndTimeSplit[2]);
@@ -376,6 +378,7 @@ client.sms.messages.create({
     from: "+15005550006"
 }, function(err, sms) {
     // process.stdout.write(sms.sid);
+    console.log(err + " in");
 });
-
+console.log("twilio");
 }
